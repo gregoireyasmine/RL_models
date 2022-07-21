@@ -36,8 +36,6 @@ for i, alpha in enumerate(np.arange(0.01, 1, 0.01)):
     scat(ax, alpha, beta, gamma, color=color, label='alpha = ' + str(alpha))
 
 
-
-
 plt.show()
 
 
