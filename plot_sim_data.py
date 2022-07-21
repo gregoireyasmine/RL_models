@@ -10,7 +10,7 @@ COLORS = mpl.colors.CSS4_COLORS
 
 
 # Local path (Jeff's CSV)
-sims = pd.read_csv('solo_sim.csv')
+sims = pd.read_csv('data/solo_sim.csv')
 sims['gamma'] = [(1 + (k % 9))/10 for k in range(len(sims))]
 sims['beta'] = [(1 + (k // 9) % 9)/10 for k in range(len(sims))]
 sims['alpha'] = [(1 + (k // 81) % 99)/100 for k in range(len(sims))]
