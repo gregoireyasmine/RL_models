@@ -10,5 +10,5 @@ video_path = '/nfs/nhome/live/gydegobert/to_annotate/' + str(n) + '/' \
              + listdir('/nfs/nhome/live/gydegobert/to_annotate/' + str(n))[0]
 
 
-deeplabcut.analyze_videos(config_path, [argv[1]], save_as_csv=True, destfolder=dest)
+deeplabcut.analyze_videos(config_path, [video_path], save_as_csv=True, destfolder=dest)
 
