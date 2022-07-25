@@ -54,10 +54,11 @@ else:
 
 def exportVideos(i, limit=1):
 
-    session = df.itertuples()[i]
-    print(f'Exporting video for {helpers.getSessionID(session)}')
-    os.mkdir(videopath + str(i))
-    helpers.exportVideo(dataroot, session, datadir=videopath, force=False)
+    for k, session in enumerate(df.itertuples()):
+        if k == i:
+            print(f'Exporting video for {helpers.getSessionID(session)}')
+            os.mkdir(videopath + str(i))
+            helpers.exportVideo(dataroot, session, datadir=videopath, force=False)
 
 
 exportVideos(n)
