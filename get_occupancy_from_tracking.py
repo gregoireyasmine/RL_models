@@ -30,4 +30,5 @@ def belong_to_circle(ptx, pty, cx, cy, radius):
 
 def is_on_patch(patch1_coords, patch2_coords):
     """ Returns i if the individual is on patch i """
+    for i, patch_coords in enumerate([patch1_coords, patch2_coords]):
 
