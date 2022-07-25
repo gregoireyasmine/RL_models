@@ -49,7 +49,9 @@ else:
     videopath = '/nfs/nhome/live/gydegobert/to_annotate/'
 
     df = df[~df.id.str.contains(';')]  # solo sessions
-    df.to_csv('video_medata.csv')
+    df.to_csv('video_metadata.csv')
+
+    print(df)
 
 
 def exportVideos(i, limit=1):
