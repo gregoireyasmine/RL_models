@@ -58,7 +58,7 @@ def exportVideos(i, limit=1):
         if k == i:
             print(f'Exporting video for {helpers.getSessionID(session)}')
             os.mkdir(videopath + str(i))
-            helpers.exportVideo(dataroot, session, datadir=videopath, force=False)
+            helpers.exportVideo(dataroot, session, datadir=videopath + str(i), force=False)
 
 
 exportVideos(n)
