@@ -21,7 +21,7 @@ import aeon.util.plotting
 helpers = aeon.util.helpers
 plotting = aeon.util.plotting
 
-n = argv[1]
+n = int(argv[1])
 
 if exists("video_metadata.csv"):
     df = pd.read_csv("video_metadata.csv")
@@ -46,19 +46,18 @@ else:
     helpers.mergeSocial(df)
     helpers.merge(df)
 
-    videopath = '/nfs/nhome/live/gydegobert/to_annotate/'
 
     df = df[~df.id.str.contains(';')]  # solo sessions
     df.to_csv('video_metadata.csv')
 
     print(df)
 
-
+videopath = '/nfs/nhome/live/gydegobert/to_annotate/'
 def exportVideos(i, limit=1):
-
     for k, session in enumerate(df.itertuples()):
         if k == i:
-            print(f'Exporting video for {helpers.getSessionID(session)}')
+            print('exporting')
+     #      " print(f'Exporting video for {helpers.getSessionID(session)}')"
             os.mkdir(videopath + str(i))
             helpers.exportVideo(dataroot, session, datadir=videopath + str(i), force=False)
 
