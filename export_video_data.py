@@ -6,7 +6,7 @@ from os import mkdir
 
 sys.path.append(expanduser('~/repos/aeon_mecha_de'))
 
-dataroot = '/nfs/winstor/delab/data/arena0.1/socialexperiment0_raw/'
+
 
 import numpy as np
 import pandas as pd
@@ -52,7 +52,13 @@ else:
 
     print(df)
 
+<<<<<<< HEAD
 videopath = '/nfs/nhome/live/gydegobert/to_annotate/'
+=======
+dataroot = '/nfs/winstor/delab/data/arena0.1/socialexperiment0/'
+
+
+>>>>>>> 80313a8fe572d5b6be302833d2a98f85e65a7d74
 def exportVideos(i, limit=1):
     for k, session in enumerate(df.itertuples()):
         if k == i:
