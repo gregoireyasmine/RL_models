@@ -33,15 +33,30 @@ for i, sess in enumerate(sessions):
     rwx, rwy, lwx, lwy = None, None, None, None
     frame = 0
     while sum([type(w) == np.float64 for w in (rwx, rwy, lwx, lwy)]) != 4:
-        rwx = sessdf.iloc[frame]['single_right_wheel_x']
-        rwy = sessdf.iloc[frame]['single_right_wheel_y']
-        lwx = sessdf.iloc[frame]['single_left_wheel_x']
-        lwy = sessdf.iloc[frame]['single_left_wheel_y']
+        rwx = sessdf.iloc[frame]['single', 'right_wheel', 'x']
+        rwy = sessdf.iloc[frame]['single', 'right_wheel', 'y']
+        lwx = sessdf.iloc[frame]['single', 'left_wheel', 'x']
+        lwy = sessdf.iloc[frame]['single', 'left_wheel', 'y']
         frame += 1
     distance_between_patches = sqrt((rwx - lwx)**2 + (rwy - lwy)**2)
     patch_radius = ROI_distance_quotient * distance_between_patches
+
+    cols = []
+
+    for animal in ['704', '705', '706']:
+        if animal in sess:
+            ind = animal
+
+    for col in sessdf.columns:
+        if col[1] == ind:
+            column = 'ind1' + '_' + col[2] + '_' + col[3]
+        else:
+            column = col[1] + '_' + col[2] + '_' + col[3]
+        cols.append(column)
+    sessdf.columns = cols
+
     for i, frame in enumerate(sessdf.itertuples()):
-        x = frame.ind1_nose_x 
+        x = frame.ind1_nose_x
         y = frame.ind1_nose_y
         if x and y:
             patch_occupied = is_on_patch(rwx, rwy, lwx, lwy, x, y, patch_radius)
