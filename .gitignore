@@ -1,5 +1,5 @@
 # Project exclude paths
 /venv/
-data/FrameTop_2022-02-09T09-00-00_position.csv
+dlcdata/FrameTop_2022-02-09T09-00-00_position.csv
 data/solo_sim.csv
 slurm.*
