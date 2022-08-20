@@ -28,7 +28,7 @@ def is_on_patch(patch1_x, patch1_y, patch2_x, patch2_y, ind_x, ind_y, radius):
 for i, sess in enumerate(sessions):
     df = pd.DataFrame(columns=['frame', 'patch_occupied'])
     filename = data_path + sess
-    sessdf = pd.read_csv(filename, headers=[0, 1, 2, 3])
+    sessdf = pd.read_csv(filename, header=[0, 1, 2, 3])
 
     cols = []
 
