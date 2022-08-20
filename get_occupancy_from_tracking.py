@@ -65,7 +65,7 @@ for i, sess in enumerate(sessions):
         df = pd.concat([df, pd.DataFrame({'frame': i, 'patch_occupied': patch_occupied}, index=[0])], ignore_index=True)
     dict[i] = df
 
-            
+np.savez('occupancy_DLC.npz', **dict)
 
-        
+
 
