@@ -3,13 +3,15 @@ import pandas as pd
 from math import sqrt
 ## This is meant to be ran on HPC
 
-data_path = '/nfs/winstor/delab/data/arena0.1/socialexperiment0_preprocessed/'
+data_path = '/nfs/nhome/live/gydegobert/repos/RL_models/dlcdata/'
 ROI_distance_quotient = 0.17
 sessions = listdir(data_path)
-df = pd.DataFrame(columns = ['frame', 'patch_occupied'])
+dict = {}
 
-for sess in sessions:
-    filename = data_path + sess + listdir(data_path + sess)[0]
+for i, sess in enumerate(sessions):
+    df = pd.DataFrame(columns = ['frame', 'patch_occupied'])
+
+    filename = data_path + sess
     sessdf = pd.read_csv(filename)
 
     rwx, rwy, lwx, lwy = None, None, None, None
@@ -30,7 +32,8 @@ for sess in sessions:
         else: 
             patch_occupied = None
         df.append({'frame': i, 'patch_occupied': patch_occupied})
-                   
+    dict[i] = df
+
             
 def belong_to_circle(ptx, pty, cx, cy, radius):
     """ Returns if a point belongs to a circle. """

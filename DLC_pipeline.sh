@@ -2,7 +2,9 @@
 
 #SBATCH -p gpu # partition (queue)
 #SBATCH --gres gpu:10
-#SBATCH -t 0-4:00 # time (D-HH:MM)
+#SBATCH --mem 64000
+
+#SBATCH -t 2-4:00 # time (D-HH:MM)
 #SBATCH -o slurm.%N.%j.out # STDOUT
 #SBATCH -e slurm.%N.%j.err # STDERR
 #SBATCH --array 0-26
