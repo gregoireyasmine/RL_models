@@ -44,6 +44,8 @@ for i, sess in enumerate(sessions):
         cols.append(column)
     sessdf.columns = cols
 
+    print(sessdf)
+
     rwx, rwy, lwx, lwy = None, None, None, None
     frame = 0
     while sum([type(w) == np.float64 for w in (rwx, rwy, lwx, lwy)]) != 4:
