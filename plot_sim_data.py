@@ -64,6 +64,8 @@ dataocc = np.mean(dataocc, axis=0)
 
 parameters = np.array([[[(alpha, beta, gamma) for gamma in np.arange(0.1, 1, 0.1)] for beta in np.arange(0.1, 1, 0.1)] for alpha in np.arange(0.01, 1, 0.01)])
 likelihood = np.zeros(np.shape(parameters))
+errors = 0
+total = 0
 for a, alpha in enumerate(np.arange(0.01, 1, 0.01)):
     for b, beta in enumerate(np.arange(0.1, 1, 0.1)):
         for g, gamma in enumerate(np.arange(0.1, 1, 0.1)):
@@ -77,17 +79,19 @@ for a, alpha in enumerate(np.arange(0.01, 1, 0.01)):
                 lklh = func(dataocc)
             except Exception as error:
                 print(error)
+                errors += 1
                 lklh = None
+            total += 1
             likelihood[a, b, g] = lklh
 print(parameters[np.where(likelihood == np.max(likelihood))])
-
+print('error rate = ', errors / total)
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 X = []
 Y = []
 Z = []
-for a in np.shape(parameters)[0]:
-    for b in np.shape(parameters)[1]:
+for a in range(np.shape(parameters)[0]):
+    for b in range(np.shape(parameters)[1]):
         g = 0
         X.append(parameters[a, b, g][0])
         Y.append(parameters[a, b, g][1])
