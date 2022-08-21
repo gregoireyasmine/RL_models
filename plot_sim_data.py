@@ -96,6 +96,7 @@ for a in range(np.shape(parameters)[0]):
         X.append(parameters[a, b, g][0])
         Y.append(parameters[a, b, g][1])
         Z.append(likelihood[a, b, g])
+print(X, Y, Z)
 ax.contour3D(X, Y, Z, 50, cmap='binary')
 plt.savefig('3Dcurve')
 
