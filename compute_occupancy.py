@@ -9,3 +9,4 @@ for session in sessions:
     occ = [np.sum(data == k)/len(data) for k in range(3)]
     occupancy[session] = occ
 np.save('dlcoccupancydata', occupancy)
+

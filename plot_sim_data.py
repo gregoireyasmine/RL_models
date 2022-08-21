@@ -5,6 +5,7 @@ import ast
 import matplotlib as mpl
 from math import log, pi
 COLORS = mpl.colors.CSS4_COLORS
+from mpl_toolkits import mplot3d
 
 # HPC path (Gregoire data)
 data_path = '/nfs/winstor/delab/data/'
@@ -45,7 +46,7 @@ for i, alpha in enumerate(np.arange(0.01, 1, 0.01)):
 def gaussian3d_fit(occ):
     mean = np.mean(occ, axis=0)
     cov = np.cov(occ, rowvar=0)
-    print(mean, cov)
+    return lambda x: log_likelihood(x, mean, cov)
 
 
 def log_likelihood(x, mean, cov):
@@ -57,7 +58,38 @@ dataocc = np.load('dlcoccupancydata.npy', allow_pickle=True).item()
 
 dataocc = np.array([dataocc[k] for k in dataocc.keys()])
 
-print(np.mean(dataocc, axis=0))
+dataocc = np.mean(dataocc, axis=0)
+
+parameters = np.array([[[(alpha, beta, gamma) for gamma in np.arange(0.1, 1, 0.1)] for beta in np.arange(0.1, 1, 0.1)] for alpha in np.arange(0.01, 1, 0.01)])
+likelihood = np.zeros(np.shape(parameters))
+for a, alpha in enumerate(np.arange(0.01, 1, 0.01)):
+    for b, beta in enumerate(np.arange(0.1, 1, 0.1)):
+        for g, gamma in enumerate(np.arange(0.1, 1, 0.1)):
+            sims_to_plot = sims.loc[sims['alpha'] == alpha]
+            sims_to_plot = sims_to_plot.loc[sims['beta'] == beta]
+            sims_to_plot = sims_to_plot.loc[sims['gamma'] == gamma]
+            occ = sims_to_plot['occ']
+            occ = np.array([ast.literal_eval(oc) for oc in occ])
+            func = gaussian3d_fit(occ)
+            lklh = func(dataocc)
+            likelihood[a, b, g] = lklh
+print(parameters[np.where(likelihood == max(likelihood))])
+
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+X = []
+Y = []
+Z = []
+for a in np.shape(parameters)[0]:
+    for b in np.shape(parameters)[1]:
+        g = 0
+        X.append(parameters[a, b, g][0])
+        Y.append(parameters[a, b, g][1])
+        Z.append(likelihood[a, b, g])
+ax.contour3D(X, Y, Z, 50, cmap='binary')
+plt.savefig('3Dcurve')
+
+
 
 """
 for alpha in np.arange(0.01, 1, 0.01):
