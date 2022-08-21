@@ -51,10 +51,8 @@ def gaussian3d_fit(occ):
 
 def log_likelihood(x, mean, cov):
     det = np.linalg.det(cov)
-    try:
-        inv = np.linalg.inv(cov)
-    except Exception:
-        raise Exception
+    print(det)
+    inv = np.linalg.inv(cov)
     return -0.5 * (log(det) + np.dot(np.dot((x - mean), inv), (x-mean)) + 3*log(2*pi))
 
 
@@ -77,9 +75,9 @@ for a, alpha in enumerate(np.arange(0.01, 1, 0.01)):
             func = gaussian3d_fit(occ)
             try:
                 lklh = func(dataocc)
-            except Exception:
-                lklh = -100000
-                print(Exception)
+            except Exception as error:
+                print(error)
+                lklh = None
             likelihood[a, b, g] = lklh
 print(parameters[np.where(likelihood == np.max(likelihood))])
 
