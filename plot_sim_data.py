@@ -81,7 +81,7 @@ for a, alpha in enumerate(np.arange(0.01, 1, 0.01)):
                 lklh = -100000
                 print(Exception)
             likelihood[a, b, g] = lklh
-print(parameters[np.where(likelihood == max(likelihood))])
+print(parameters[np.where(likelihood == np.max(likelihood))])
 
 fig = plt.figure()
 ax = plt.axes(projection='3d')
