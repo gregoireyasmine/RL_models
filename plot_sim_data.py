@@ -51,10 +51,9 @@ def log_likelihood(x, mean, cov):
     return -0.5 * (log(det) + np.dot(np.dot((x - mean), np.linalg.inv(cov)), (x-mean)) + 3*log(2*pi))
 
 
-def compute_occupancy():
-    
+dataocc = np.load('dlcoccupancydata.npy', allow_pickle=True)
 
-
+print
 
 """
 for alpha in np.arange(0.01, 1, 0.01):
