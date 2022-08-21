@@ -46,6 +46,8 @@ for i, alpha in enumerate(np.arange(0.01, 1, 0.01)):
 def gaussian3d_fit(occ):
     mean = np.mean(occ, axis=0)
     cov = np.cov(occ, rowvar=0)
+    print(mean)
+    print(cov)
     return lambda x: log_likelihood(x, mean, cov)
 
 
