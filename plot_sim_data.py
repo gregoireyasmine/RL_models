@@ -57,7 +57,7 @@ dataocc = np.load('dlcoccupancydata.npy', allow_pickle=True).item()
 
 dataocc = np.array([dataocc[k] for k in dataocc.keys()])
 
-print(np.mean(dataocc))
+print(np.mean(dataocc, axis=0))
 
 """
 for alpha in np.arange(0.01, 1, 0.01):
