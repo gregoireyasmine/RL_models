@@ -2,7 +2,8 @@ from os import listdir
 import pandas as pd
 from math import sqrt
 import numpy as np
-
+from sys import argv
+n = argv[1]
 ## This is meant to be ran on HPC
 
 data_path = '/nfs/nhome/live/gydegobert/repos/RL_models/dlcdata/'
@@ -25,11 +26,12 @@ def is_on_patch(patch1_x, patch1_y, patch2_x, patch2_y, ind_x, ind_y, radius):
     return 0
 
 
-for i, sess in enumerate(sessions):
-    df = pd.DataFrame(columns=['frame', 'patch_occupied'])
-    filename = data_path + sess
-    sessdf = pd.read_csv(filename, header=[0, 1, 2, 3])
-
+sess = sessions[n]
+df = pd.DataFrame(columns=['frame', 'patch_occupied'])
+filename = data_path + sess
+try:
+    sessdf = pd.read_csv(filename, header=[0, 1, 2, 3], encoding="ISO-8859-1")
+    print('analyzing ', sess, ' DLC data')
     cols = []
 
     for animal in ['704', '705', '706']:
@@ -60,12 +62,13 @@ for i, sess in enumerate(sessions):
         y = frame.ind1_nose_y
         if x and y:
             patch_occupied = is_on_patch(rwx, rwy, lwx, lwy, x, y, patch_radius)
-        else: 
+        else:
             patch_occupied = None
         df = pd.concat([df, pd.DataFrame({'frame': i, 'patch_occupied': patch_occupied}, index=[0])], ignore_index=True)
-    dict[i] = df
+    np.save('./dlcdata/occupancy_DLC_' + sess + '.npz', df)
 
-np.savez('occupancy_DLC.npz', **dict)
+except Exception:
+    print(Exception)
 
 
 
