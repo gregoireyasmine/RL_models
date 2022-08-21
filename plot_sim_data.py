@@ -75,7 +75,7 @@ for a, alpha in enumerate(np.arange(0.01, 1, 0.01)):
             sims_to_plot = sims_to_plot.loc[sims['beta'] == beta]
             sims_to_plot = sims_to_plot.loc[sims['gamma'] == gamma]
             occ = sims_to_plot['occ']
-            occ = np.array([ast.literal_eval(oc) for oc in occ])
+            occ = np.array([ast.literal_eval(oc)[0, 1, 2] for oc in occ])
             func = gaussian3d_fit(occ)
             try:
                 lklh = func(dataocc)
