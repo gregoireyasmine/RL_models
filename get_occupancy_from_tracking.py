@@ -3,7 +3,7 @@ import pandas as pd
 from math import sqrt
 import numpy as np
 from sys import argv
-n = argv[1]
+n = int(argv[1])
 ## This is meant to be ran on HPC
 
 data_path = '/nfs/nhome/live/gydegobert/repos/RL_models/dlcdata/'
