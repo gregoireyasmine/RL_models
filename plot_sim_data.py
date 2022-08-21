@@ -77,7 +77,9 @@ for a, alpha in enumerate(np.arange(0.01, 1, 0.01)):
             func = gaussian3d_fit(occ)
             try:
                 lklh = func(dataocc)
-            except
+            except Exception:
+                lklh = -100000
+                print(Exception)
             likelihood[a, b, g] = lklh
 print(parameters[np.where(likelihood == max(likelihood))])
 
