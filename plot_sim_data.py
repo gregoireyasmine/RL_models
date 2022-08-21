@@ -51,9 +51,11 @@ def log_likelihood(x, mean, cov):
     return -0.5 * (log(det) + np.dot(np.dot((x - mean), np.linalg.inv(cov)), (x-mean)) + 3*log(2*pi))
 
 
-dataocc = np.load('dlcoccupancydata.npy', allow_pickle=True)
+dataocc = np.load('dlcoccupancydata.npy', allow_pickle=True).item()
 
-print
+dataocc = np.array([dataocc[k] for k in dataocc.keys()])
+
+print(np.mean(dataocc))
 
 """
 for alpha in np.arange(0.01, 1, 0.01):
