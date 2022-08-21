@@ -51,7 +51,11 @@ def gaussian3d_fit(occ):
 
 def log_likelihood(x, mean, cov):
     det = np.linalg.det(cov)
-    return -0.5 * (log(det) + np.dot(np.dot((x - mean), np.linalg.inv(cov)), (x-mean)) + 3*log(2*pi))
+    try:
+        inv = np.linalg.inv(cov)
+    except Exception:
+        return Exception
+    return -0.5 * (log(det) + np.dot(np.dot((x - mean), inv), (x-mean)) + 3*log(2*pi))
 
 
 dataocc = np.load('dlcoccupancydata.npy', allow_pickle=True).item()
@@ -71,7 +75,9 @@ for a, alpha in enumerate(np.arange(0.01, 1, 0.01)):
             occ = sims_to_plot['occ']
             occ = np.array([ast.literal_eval(oc) for oc in occ])
             func = gaussian3d_fit(occ)
-            lklh = func(dataocc)
+            try:
+                lklh = func(dataocc)
+            except
             likelihood[a, b, g] = lklh
 print(parameters[np.where(likelihood == max(likelihood))])
 
