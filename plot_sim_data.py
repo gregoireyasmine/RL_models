@@ -54,7 +54,7 @@ def log_likelihood(x, mean, cov):
     try:
         inv = np.linalg.inv(cov)
     except Exception:
-        return Exception
+        raise Exception
     return -0.5 * (log(det) + np.dot(np.dot((x - mean), inv), (x-mean)) + 3*log(2*pi))
 
 
