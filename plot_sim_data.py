@@ -117,7 +117,12 @@ for k in range(3):
     Z = np.zeros((np.shape(X)))
     for p1 in range(len(param1_val)):
         for p2 in range(len(param2_val)):
-            Z[p2, p1] = np.nanmax(likelihood, axis=2-k)[p2, p1]
+            try:
+                Z[p2, p1] = np.nanmax(likelihood, axis=2-k)[p2, p1]
+            except IndexError:
+                print(np.shape(Z))
+                print(a, b)
+                print(np.shape(likelihood))
     c = ax.pcolorfast(X, Y, Z, cmap='RdBu', vmin=np.min(Z), vmax=np.max(Z))
     ax[k].set_xlabel(param1)
     ax[k].set_ylabel(param2)
