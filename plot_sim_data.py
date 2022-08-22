@@ -83,13 +83,13 @@ for a, alpha in enumerate([k/100 for k in range(1, 100)]):
             total += 1
             likelihood[a, b, g] = lklh
 print('max_likelihood: ', np.nanmax(likelihood))
-print(parameters[np.where(likelihood == np.max(likelihood))])
+print(parameters[np.where(likelihood == np.nanmax(likelihood))])
 print('error rate = ', errors / total)
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 X = [k/100 for k in range(1, 100)]
 Y = [k/10 for k in range(1, 10)]
-X, Y = np.meshgrid(X, Y)
+X, Y = np.meshgrid(Y, X)
 Z = np.zeros(np.shape(X))
 for a in range(1, 100):
     for b in range(1, 10):
