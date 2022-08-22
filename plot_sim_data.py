@@ -123,7 +123,7 @@ for k in range(3):
                 print(np.shape(Z))
                 print(p1, p2)
                 print(np.shape(likelihood))
-    c = ax.pcolorfast(X, Y, Z, cmap='RdBu', vmin=np.min(Z), vmax=np.max(Z))
+    c = ax[k].pcolorfast(X, Y, Z, cmap='RdBu', vmin=np.min(Z), vmax=np.max(Z))
     ax[k].set_xlabel(param1)
     ax[k].set_ylabel(param2)
     fig.colorbar(c, ax=ax[k])
