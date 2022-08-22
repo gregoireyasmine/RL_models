@@ -68,9 +68,9 @@ parameters = np.array([[[(alpha, beta, gamma) for gamma in np.arange(0.1, 1, 0.1
 likelihood = np.zeros(np.shape(parameters))
 errors = 0
 total = 0
-for a, alpha in enumerate(np.arange(0.01, 1, 0.01)):
-    for b, beta in enumerate(np.arange(0.1, 1, 0.1)):
-        for g, gamma in enumerate(np.arange(0.1, 1, 0.1)):
+for a, alpha in enumerate([k/100 for k in range(1, 100)]):
+    for b, beta in enumerate([k/10 for k in range(1, 10)]):
+        for g, gamma in enumerate([k/10 for k in range(1, 10)]):
             sims_to_plot = sims.loc[sims['alpha'] == alpha]
             sims_to_plot = sims_to_plot.loc[sims['beta'] == beta]
             sims_to_plot = sims_to_plot.loc[sims['gamma'] == gamma]
