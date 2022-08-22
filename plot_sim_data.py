@@ -78,7 +78,8 @@ for a, alpha in enumerate([k/100 for k in range(1, 100)]):
                 lklh = func(dataocc)
                 print(lklh)
             except Exception as error:
-                print('error: ', error)                errors += 1
+                print('error: ', error)
+                errors += 1
                 lklh = None
             total += 1
             likelihood[a, b, g] = lklh
