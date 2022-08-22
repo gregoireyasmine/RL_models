@@ -105,7 +105,7 @@ ax.plot_surface(X, Y, Z, rstride=1, cstride=1,
                 cmap='viridis', edgecolor='none')
 plt.savefig('3Dcurve')
 
-fig, ax = plt.subplots(1, 3)
+fig, ax = plt.subplots([1, 3], figsize=(15, 6))
 plots = [["alpha", "beta"], ["beta", "gamma"], ["gamma", "alpha"]]
 params = {"alpha": alpha, "beta": beta, "gamma": gamma}
 for k in range(3):
@@ -119,9 +119,12 @@ for k in range(3):
         for p2 in range(len(param2_val)):
             Z[p2, p1] = np.nanmax(likelihood, axis=2-k)[p2, p1]
     c = ax.pcolorfast(X, Y, Z, cmap='RdBu', vmin=np.min(Z), vmax=np.max(Z))
-    ax.set_xlabel(param1)
-    ax.set_ylabel(param2)
-    fig.colorbar(c, ax=ax)
+    ax[k].set_xlabel(param1)
+    ax[k].set_ylabel(param2)
+    fig.colorbar(c, ax=ax[k])
+fig.tight_layout()
+plt.savefig('parameters likelihood')
+
 
 
 
