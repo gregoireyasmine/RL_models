@@ -75,6 +75,7 @@ for a, alpha in enumerate(np.arange(0.01, 1, 0.01)):
             sims_to_plot = sims_to_plot.loc[sims['beta'] == beta]
             sims_to_plot = sims_to_plot.loc[sims['gamma'] == gamma]
             occ = sims_to_plot['occ']
+            print('len', len('occ'))
             occ = np.array([[ast.literal_eval(oc)[k] for k in [0, 2, 3]] for oc in occ])
             func = gaussian3d_fit(occ)
             try:
