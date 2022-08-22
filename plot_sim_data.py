@@ -94,14 +94,13 @@ fig = plt.figure()
 ax = plt.axes(projection='3d')
 X = []
 Y = []
-Z = []
 for a in range(np.shape(parameters)[0]):
     for b in range(np.shape(parameters)[1]):
         g = 0
         X.append(parameters[a, b, g][0])
         Y.append(parameters[a, b, g][1])
-        Z.append(likelihood[a, b, g])
-print(X, Y, Z)
+X, Y = np.meshgrid(X, Y)
+Z = likelihood[np.where(parameters[:, :, :][0] == X and parameters[:, :, :][1] == Y)]
 ax.contour3D(X, Y, Z, 50, cmap='binary')
 plt.savefig('3Dcurve')
 
