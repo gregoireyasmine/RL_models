@@ -61,7 +61,7 @@ dataocc = np.array([dataocc[k] for k in dataocc.keys()])
 
 dataocc = np.mean(dataocc, axis=0)
 
-parameters = np.array([[[(alpha, beta, gamma) for gamma in np.arange(0.1, 1, 0.1)] for beta in np.arange(0.1, 1, 0.1)] for alpha in np.arange(0.01, 1, 0.01)])
+parameters = np.array([[[(alpha, beta, gamma) for gamma in [k/10 for k in range(1, 10)]] for beta in [k/10 for k in range(1, 10)]] for alpha in [k/100 for k in range(1, 100)]])
 likelihood = np.zeros(np.shape(parameters)[:-1])
 errors = 0
 total = 0
@@ -86,15 +86,14 @@ print(parameters[np.where(likelihood == np.max(likelihood))])
 print('error rate = ', errors / total)
 fig = plt.figure()
 ax = plt.axes(projection='3d')
-X = []
-Y = []
-for a in range(np.shape(parameters)[0]):
-    for b in range(np.shape(parameters)[1]):
-        g = 0
-        X.append(parameters[a, b, g][0])
-        Y.append(parameters[a, b, g][1])
+X = [k/100 for k in range(1, 100)]
+Y = [k/10 for k in range(1, 10)]
 X, Y = np.meshgrid(X, Y)
-Z = likelihood[np.where(parameters[:, :, :][0] == X and parameters[:, :, :][1] == Y)]
+Z = np.zeros(np.shape(X))
+for a in range(1, 100):
+    for b in range(1, 10):
+        g = 0
+        Z[a, b] = likelihood[a, b, g]
 ax.contour3D(X, Y, Z, 50, cmap='binary')
 plt.savefig('3Dcurve')
 
