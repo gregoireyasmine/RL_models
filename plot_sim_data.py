@@ -123,6 +123,7 @@ for k in range(3):
                 print(np.shape(Z))
                 print(p1, p2)
                 print(np.shape(likelihood))
+                print(np.shape(X), np.shape(Y))
     c = ax[k].pcolorfast(X, Y, Z, cmap='RdBu', vmin=np.min(Z), vmax=np.max(Z))
     ax[k].set_xlabel(param1)
     ax[k].set_ylabel(param2)
