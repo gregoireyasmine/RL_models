@@ -65,7 +65,7 @@ dataocc = np.array([dataocc[k] for k in dataocc.keys()])
 dataocc = np.mean(dataocc, axis=0)
 
 parameters = np.array([[[(alpha, beta, gamma) for gamma in np.arange(0.1, 1, 0.1)] for beta in np.arange(0.1, 1, 0.1)] for alpha in np.arange(0.01, 1, 0.01)])
-likelihood = np.zeros(np.shape(parameters))
+likelihood = np.zeros(np.shape(parameters)[:-1])
 errors = 0
 total = 0
 for a, alpha in enumerate([k/100 for k in range(1, 100)]):
