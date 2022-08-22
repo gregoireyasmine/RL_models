@@ -91,8 +91,8 @@ X = [k/100 for k in range(1, 100)]
 Y = [k/10 for k in range(1, 10)]
 X, Y = np.meshgrid(Y, X)
 Z = np.zeros(np.shape(X))
-for a in range(1, 100):
-    for b in range(1, 10):
+for a in range(0, 99):
+    for b in range(0, 9):
         g = 0
         try:
             Z[a, b] = likelihood[a, b, g]
