@@ -87,15 +87,16 @@ print(parameters[np.where(likelihood == np.nanmax(likelihood))])
 print('error rate = ', errors / total)
 fig = plt.figure()
 ax = plt.axes(projection='3d')
-X = [k/100 for k in range(1, 100)]
-Y = [k/10 for k in range(1, 10)]
-X, Y = np.meshgrid(Y, X)
+alpha = [k/100 for k in range(1, 100)]
+beta = [k/10 for k in range(1, 10)]
+gamma = [k/10 for k in range(1, 10)]
+X, Y = np.meshgrid(alpha, beta)
 Z = np.zeros(np.shape(X))
 for a in range(0, 99):
     for b in range(0, 9):
         g = 4
         try:
-            Z[a, b] = likelihood[a, b, g]
+            Z[b, a] = likelihood[a, b, g]
         except IndexError:
             print(np.shape(Z))
             print(a, b)
@@ -103,6 +104,29 @@ for a in range(0, 99):
 ax.plot_surface(X, Y, Z, rstride=1, cstride=1,
                 cmap='viridis', edgecolor='none')
 plt.savefig('3Dcurve')
+
+fig, ax = plt.subplots(1, 3)
+plots = [["alpha", "beta"], ["beta", "gamma"], ["gamma", "alpha"]]
+params = {"alpha": alpha, "beta": beta, "gamma": gamma}
+for k in range(3):
+    param1 = plots[k][0]
+    param2 = plots[k][1]
+    param1_val = params[param1]
+    param2_val = params[param2]
+    X, Y = np.meshgrid(param1_val, param2_val)
+    Z = np.zeros((np.shape(X)))
+    for p1 in range(len(param1_val)):
+        for p2 in range(len(param2_val)):
+            Z[p2, p1] = np.nanmax(likelihood, axis=2-k)[p2, p1]
+    c = ax.pcolorfast(X, Y, Z, cmap='RdBu', vmin=np.min(Z), vmax=np.max(Z))
+    ax.set_xlabel(param1)
+    ax.set_ylabel(param2)
+    fig.colorbar(c, ax=ax)
+
+
+
+
+
 
 
 
