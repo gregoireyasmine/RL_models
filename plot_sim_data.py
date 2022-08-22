@@ -76,7 +76,6 @@ for a, alpha in enumerate([k/100 for k in range(1, 100)]):
             func = gaussian3d_fit(occ)
             try:
                 lklh = func(dataocc)
-                print(lklh)
             except Exception as error:
                 print('error: ', error)
                 errors += 1
