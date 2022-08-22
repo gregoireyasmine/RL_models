@@ -93,7 +93,7 @@ X, Y = np.meshgrid(Y, X)
 Z = np.zeros(np.shape(X))
 for a in range(0, 99):
     for b in range(0, 9):
-        g = 0
+        g = 4
         try:
             Z[a, b] = likelihood[a, b, g]
         except IndexError:
