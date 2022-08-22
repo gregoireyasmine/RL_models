@@ -52,7 +52,7 @@ def gaussian3d_fit(occ):
 def log_likelihood(x, mean, cov):
     det = np.linalg.det(cov)
     inv = np.linalg.inv(cov)
-    return -0.5 * (log(det) + np.dot(np.dot((x - mean), inv), (x-mean)) + 3*log(2*pi))
+    return -0.5 * (log(abs(det)) + np.dot(np.dot((x - mean), inv), (x-mean)) + 3*log(2*pi))
 
 
 dataocc = np.load('dlcoccupancydata.npy', allow_pickle=True).item()
