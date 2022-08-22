@@ -105,7 +105,7 @@ ax.plot_surface(X, Y, Z, rstride=1, cstride=1,
                 cmap='viridis', edgecolor='none')
 plt.savefig('3Dcurve')
 
-fig, ax = plt.subplots([1, 3], figsize=(15, 6))
+fig, ax = plt.subplots(1, 3, figsize=(15, 6))
 plots = [["alpha", "beta"], ["beta", "gamma"], ["gamma", "alpha"]]
 params = {"alpha": alpha, "beta": beta, "gamma": gamma}
 for k in range(3):
