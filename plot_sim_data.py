@@ -83,6 +83,7 @@ for a, alpha in enumerate([k/100 for k in range(1, 100)]):
                 lklh = None
             total += 1
             likelihood[a, b, g] = lklh
+print('max_likelihood: ', np.max(likelihood))
 print(parameters[np.where(likelihood == np.max(likelihood))])
 print('error rate = ', errors / total)
 fig = plt.figure()
