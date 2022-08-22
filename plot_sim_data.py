@@ -46,14 +46,11 @@ for i, alpha in enumerate(np.arange(0.01, 1, 0.01)):
 def gaussian3d_fit(occ):
     mean = np.mean(occ, axis=0)
     cov = np.cov(occ, rowvar=0)
-    print('mean: ', mean)
-    print('cov: ',)
     return lambda x: log_likelihood(x, mean, cov)
 
 
 def log_likelihood(x, mean, cov):
     det = np.linalg.det(cov)
-    print('det: ', det)
     inv = np.linalg.inv(cov)
     return -0.5 * (log(det) + np.dot(np.dot((x - mean), inv), (x-mean)) + 3*log(2*pi))
 
@@ -75,16 +72,13 @@ for a, alpha in enumerate([k/100 for k in range(1, 100)]):
             sims_to_plot = sims_to_plot.loc[sims['beta'] == beta]
             sims_to_plot = sims_to_plot.loc[sims['gamma'] == gamma]
             occ = sims_to_plot['occ']
-            print('len', len(occ))
             occ = np.array([[ast.literal_eval(oc)[k] for k in [0, 2, 3]] for oc in occ])
             func = gaussian3d_fit(occ)
             try:
                 lklh = func(dataocc)
                 print(lklh)
             except Exception as error:
-                print('error: ', error)
-                print('occ:', occ)
-                errors += 1
+                print('error: ', error)                errors += 1
                 lklh = None
             total += 1
             likelihood[a, b, g] = lklh
