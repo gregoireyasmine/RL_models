@@ -100,7 +100,8 @@ for a in range(0, 99):
             print(np.shape(Z))
             print(a, b)
             print(np.shape(likelihood))
-ax.contour3D(X, Y, Z, 50, cmap='binary')
+ax.plot_surface(X, Y, Z, rstride=1, cstride=1,
+                cmap='viridis', edgecolor='none')
 plt.savefig('3Dcurve')
 
 
