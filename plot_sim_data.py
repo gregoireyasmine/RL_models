@@ -115,14 +115,15 @@ for k in range(3):
     param2_val = params[param2]
     X, Y = np.meshgrid(param2_val, param1_val)
     Z = np.zeros((np.shape(X)))
+    first = 0
     for p1 in range(len(param1_val)):
         for p2 in range(len(param2_val)):
-            first = 0
             try:
                 Z[p2, p1] = np.nanmax(likelihood, axis=2-k)[p1, p2]
             except IndexError:
                 if first == 0:
                     print(np.nanmax(likelihood, axis=2-k))
+                    print(np.shape(np.nanmax(likelihood, axis=2-k)))
                     print(p1, p2)
                     print(Z)
                     first = 1
