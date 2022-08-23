@@ -113,6 +113,7 @@ for k in range(3):
     param2 = plots[k][1]
     param1_val = params[param1]
     param2_val = params[param2]
+    print(param1, param2)
     X, Y = np.meshgrid(param2_val, param1_val)
     Z = np.zeros((np.shape(X)))
     first = 0
