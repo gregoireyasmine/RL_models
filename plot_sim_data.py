@@ -117,13 +117,17 @@ for k in range(3):
     Z = np.zeros((np.shape(X)))
     for p1 in range(len(param1_val)):
         for p2 in range(len(param2_val)):
+            first = 0
             try:
                 Z[p2, p1] = np.nanmax(likelihood, axis=2-k)[p1, p2]
             except IndexError:
-                print(np.shape(Z))
-                print(p1, p2)
-                print(np.shape(likelihood))
-                print(np.shape(X), np.shape(Y))
+                if first == 0:
+                    print(np.nanmax(likelihood, axis=2-k))
+                    print(p1, p2)
+                    print(Z)
+                    first = 1
+                else:
+                    print(p1, p2)
     c = ax[k].imshow(Z, cmap='RdBu', vmin=np.min(Z), vmax=np.max(Z),
                      extent=[X.min(), X.max(), Y.min(), Y.max()],
                      interpolation='nearest', origin='lower')
