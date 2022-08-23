@@ -124,7 +124,9 @@ for k in range(3):
                 print(p1, p2)
                 print(np.shape(likelihood))
                 print(np.shape(X), np.shape(Y))
-    c = ax[k].pcolorfast(X, Y, Z, cmap='RdBu', vmin=np.min(Z), vmax=np.max(Z))
+    c = ax[k].imshow(Z, cmap='RdBu', vmin=np.min(Z), vmax=np.max(Z),
+                     extent=[X.min(), X.max(), Y.min(), Y.max()],
+                     interpolation='nearest', origin='lower')
     ax[k].set_xlabel(param1)
     ax[k].set_ylabel(param2)
     fig.colorbar(c, ax=ax[k])
