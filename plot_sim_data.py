@@ -133,9 +133,9 @@ for k in range(3):
     c = ax[k].imshow(Z, cmap='RdBu', vmin=np.min(Z), vmax=np.max(Z),
                      extent=[X.min(), X.max(), Y.min(), Y.max()],
                      interpolation='nearest', origin='lower')
-    ax[k].set_xlabel(param1)
-    ax[k].set_ylabel(param2)
-    fig.colorbar(c, ax=ax[k])
+    ax[k].set_xlabel(param2)
+    ax[k].set_ylabel(param1)
+    fig.colorbar(c, ax=ax[k], shrink=0.8)
 fig.tight_layout()
 plt.savefig('parameters likelihood')
 
