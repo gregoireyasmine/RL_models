@@ -119,7 +119,7 @@ for k in range(3):
     for p1 in range(len(param1_val)):
         for p2 in range(len(param2_val)):
             try:
-                Z[p2, p1] = np.nanmax(likelihood, axis=2-k)[p1, p2]
+                Z[p1, p2] = np.nanmax(likelihood, axis=2-k)[p1, p2]
             except IndexError:
                 if first == 0:
                     print(np.nanmax(likelihood, axis=2-k))
